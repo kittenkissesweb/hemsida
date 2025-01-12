@@ -1,0 +1,25 @@
+name: generate
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          repository: kittenkissesweb/pelican-purple
+          path: pelican-purple
+      - name: GitHub Pages Pelican Build Action
+        uses: nelsonjchen/gh-pages-pelican-action@0.2.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_PAGES_CNAME: www.kittenkisses.org
